@@ -1,0 +1,125 @@
+{
+	"name": "memberdash/memberdash",
+	"description": "The most powerful, easy to use and flexible membership plugin for WordPress sites available.",
+	"type": "wordpress-plugin",
+	"homepage": "https://www.memberdash.com",
+	"license": "proprietary",
+	"require": {
+		"php": ">=7.4",
+		"stellarwp/telemetry": "1.0.6",
+		"lucatume/di52": "^3.0",
+		"psr/container": "1.1.1",
+		"stellarwp/container-contract": "^1.0",
+		"stripe/stripe-php": "^10.12"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0",
+		"exussum12/coverage-checker": "^1",
+		"phpcompatibility/phpcompatibility-wp": "^2",
+		"phpstan/extension-installer": "^1",
+		"phpstan/phpstan": "^1",
+		"roave/security-advisories": "dev-latest",
+		"slevomat/coding-standard": "^8",
+		"squizlabs/php_codesniffer": "^3",
+		"szepeviktor/phpstan-wordpress": "^1",
+		"wp-cli/wp-cli-bundle": "^2",
+		"wp-coding-standards/wpcs": "^2"
+	},
+	"scripts": {
+		"phpcs": "phpcs -s --standard=phpcs.xml",
+		"phpcs-partial": "dev_scripts/partial-phpcs.sh selected",
+		"phpcs-ci": "dev_scripts/partial-phpcs.sh diff",
+		"phpcs-autofix": "phpcbf -s --standard=phpcs.xml",
+		"phpcs-txt": "phpcs -s --no-colors --standard=phpcs.xml > phpcs.txt",
+		"phpcs-json": "phpcs --standard=phpcs.xml --report=json > phpcs.json",
+		"phpstan": "phpstan analyse --memory-limit 2G --error-format=table",
+		"phpstan-ci": "phpstan analyse --memory-limit 4G --error-format=table",
+		"phpstan-baseline": "phpstan analyse --memory-limit 2G --level max --configuration phpstan.neon --generate-baseline",
+		"phpstan-txt": "phpstan analyse --memory-limit 2G --error-format=table > phpstan.txt",
+		"phpstan-json": "phpstan analyse --memory-limit 2G --error-format=prettyJson > phpstan.json",
+		"cspell-full": "npm run cspell-full",
+		"cspell-cmd": "npm run cspell-cmd",
+		"check": [
+			"composer phpcs-partial ''",
+			"@phpstan",
+			"@cspell-cmd"
+		],
+		"check-full": [
+			"@phpcs-ci",
+			"@phpstan",
+			"@cspell-full"
+		],
+		"make-pot": "wp i18n make-pot . languages/memberdash.pot --exclude=vendor,node_modules,.git",
+		"prepare-release": [
+			"@make-pot"
+		],
+		"compatibility:php-7.4": "phpcs -s --standard=phpcs-php-compatibility.xml --runtime-set testVersion 7.4",
+		"compatibility:php-8.0": "phpcs -s --standard=phpcs-php-compatibility.xml --runtime-set testVersion 8.0",
+		"compatibility:php-8.1": "phpcs -s --standard=phpcs-php-compatibility.xml --runtime-set testVersion 8.1",
+		"compatibility": [
+			"@compatibility:php-7.4",
+			"@compatibility:php-8.0",
+			"@compatibility:php-8.1"
+		],
+		"set_numeric_version": "dev_scripts/set-numeric-version.sh",
+		"strauss": [
+			"[[ -f ./dev_scripts/strauss.phar ]] || curl -o dev_scripts/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/download/0.14.0/strauss.phar",
+			"@php dev_scripts/strauss.phar"
+		],
+		"post-install-cmd": [
+			"@strauss",
+			"@php dev_scripts/strauss-workaround-fixes.php",
+			"echo \"<?php\" > vendor/lucatume/di52/aliases.php",
+			"echo \"<?php\" > vendor-prefixed/lucatume/di52/aliases.php"
+		],
+		"post-update-cmd": [
+			"@strauss",
+			"@php dev_scripts/strauss-workaround-fixes.php",
+			"echo \"<?php\" > vendor/lucatume/di52/aliases.php",
+			"echo \"<?php\" > vendor-prefixed/lucatume/di52/aliases.php"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		}
+	},
+	"autoload" : {
+		"psr-4": {
+			"Memberdash\\Core\\": "app/core"
+		}
+	},
+	"extra": {
+		"strauss": {
+			"target_directory": "vendor-prefixed",
+			"classmap_prefix": "Memberdash_",
+			"constant_prefix": "MEMBERDASH_",
+			"namespace_prefix": "StellarWP\\Memberdash",
+			"delete_vendor_files": true,
+			"packages": [
+				"stellarwp/telemetry",
+				"lucatume/di52",
+				"stripe/stripe-php"
+			],
+			"exclude_from_copy": {
+				"packages": [
+					"psr/container"
+				]
+			},
+			"exclude_from_prefix": {
+				"file_patterns": []
+			},
+			"override_autoload": {
+				"stripe/stripe-php": {
+					"psr-4": {
+						"Stripe\\": "lib/"
+					},
+					"files": [
+						"data"
+					]
+				}
+			}
+		}
+	}
+}

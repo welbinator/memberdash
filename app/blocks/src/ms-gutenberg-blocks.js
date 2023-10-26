@@ -1,0 +1,15 @@
+import './common/getMemberships'
+import './ms-membership-title';
+import './ms-invoice';
+import './ms-membership-account';
+import './ms-membership-account-link';
+import './ms-membership-buy';
+import './ms-membership-details';
+import './ms-membership-price';
+import './ms-membership-note';
+import './ms-user';
+import './ms-protect-content';
+import './ms-membership-signup';
+import './ms-member-info';
+import './ms-membership-register-user';
+import './ms-membership-login';

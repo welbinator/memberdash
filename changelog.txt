@@ -1,0 +1,19 @@
+= [1.0.3] =
+
+* Fix - Disable trial period for non-recurring payments.
+* Fix - Import tool doesn't work as expected.
+* Fix - Recurring Payments Fail With Free Trial.
+
+= [1.0.2] =
+
+* Feature - Integrated Telemetry library to help improve MemberDash through information collected.
+* Tweak   - A notice will display to the admin if a payment gateway has not been set up and Paid Memberships have been created.
+* Tweak   - Enhanced Membership creation steps when the user creates a new Paid Membership.
+
+= [1.0.1] =
+
+* Fix - Stripe live mode issues.
+
+= [1.0.0] =
+
+* Initial version.

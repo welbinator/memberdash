@@ -1,0 +1,18 @@
+includes:
+	- phpstan-baseline.neon
+parameters:
+	reportUnmatchedIgnoredErrors: false
+	checkGenericClassInNonGenericObjectType: false
+	bootstrapFiles:
+		- phpstan_bootstrap.php
+	level: max
+	scanDirectories:
+		- vendor-prefixed
+	paths:
+		- app
+		- lib
+		- memberdash.php
+		- uninstall.php
+	excludePaths:
+		analyse:
+			- dev_scripts

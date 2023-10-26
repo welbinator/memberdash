@@ -1,0 +1,35 @@
+{
+	"devDependencies": {
+		"@wordpress/scripts": "^25",
+		"clean-css-cli": "^5",
+		"cspell": "^6",
+		"npm-run-all": "^4",
+		"prettier": "^2",
+		"multi-uglify-js": "^0.1"
+	},
+	"_zipname": "memberdash",
+	"_version_files": [
+        {
+            "file": "memberdash.php",
+            "regex": "(define\\( 'MEMBERDASH_VERSION', ')([^']+)"
+        },
+        {
+            "file": "memberdash.php",
+            "regex": "(Version: )([^\\s]+)"
+        }
+    ],
+	"scripts": {
+		"build:blocks": "cd app/blocks && npm run build",
+		"build": "run-p build:*",
+		"cspell-cmd": "npx cspell lint -c .cspell.json --no-progress --no-must-find-files --dot",
+		"cspell-full": "npm run cspell-cmd '**'",
+		"generate-release-asset": "git archive --prefix=memberdash/ -o",
+		"install-deps": "composer install && npm run install-npm-deps",
+		"install-npm-deps": "cd app/blocks && npm ci",
+		"make-pot": "composer make-pot",
+		"minify:css": "npx clean-css-cli app/assets/css/*.css -b --batch-suffix .min -o app/assets/css/min",
+		"minify:js": "npx multi-uglifyjs app/assets/js/*.js --compress --mangle -o app/assets/js/min",
+		"minify": "run-p minify:*",
+		"release": "npm run build && npm run minify && npm run make-pot"
+	}
+}

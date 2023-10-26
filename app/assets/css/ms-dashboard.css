@@ -1,0 +1,88 @@
+/**
+ * General styles used in dashboard.
+ */
+
+.ms-memberdash .memberdash-wp-dashboard-stats {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.memberdash-wp-dashboard .memberdash-wp-dashboard-daterange-wrapper {
+  border-bottom: 1px solid #e6e6e6;
+  margin: 0 -12px 0 -12px;
+  padding: 0 12px 12px 12px;
+}
+
+.memberdash-wp-dashboard-daterange-wrapper .memberdash-wp-dashboard-daterange {
+  background: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.memberdash-wp-dashboard-stats .memberdash-data-block {
+  width: 48%;
+  letter-spacing: 0.04em;
+}
+
+.memberdash-data-block .memberdash-data-block-title {
+  font-size: 0.75rem;
+}
+
+.memberdash-data-block .memberdash-data-block-data {
+  font-size: 2.125rem;
+  color: #000;
+  line-height: 1;
+}
+
+.ms-reporting-widget {
+  width: 30%;
+  float: left;
+  margin: 0 8px 20px;
+}
+
+.ms-reporting-widget-title {
+  padding-left: 10px;
+  font-size: 1.2em;
+}
+
+.ms-reporting-csv {
+  border-top: 2px solid #c3c4c7;
+}
+
+.ms-filter-wrapper {
+  border: 1px solid #c3c4c7;
+  margin: 10px;
+  padding: 10px;
+}
+
+.ms-filter-wrapper h3 {
+  font-size: 1.1em;
+}
+
+.box-reporting-csv {
+  position: relative;
+  padding: 25px 25px 25px;
+  overflow: hidden;
+}
+
+.box-reporting-csv .item-icon {
+  position: absolute;
+  bottom: -45px;
+  right: -15px;
+  transform: rotate(-20deg);
+  z-index: 16;
+  color: #afafaf;
+}
+
+.box-reporting-csv .item-icon i {
+  opacity: 0.1;
+  font-size: 100px;
+}
+
+.button-reporting-csv {
+  color: #4F46E4;
+}
