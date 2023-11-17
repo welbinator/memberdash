@@ -1,0 +1,18 @@
+actor: Tester
+bootstrap: _bootstrap.php
+paths:
+  tests: tests
+  output: tests/_output
+  data: tests/_data
+  support: tests/_support
+  envs: tests/_envs
+  wp_root: "%WP_ROOT_FOLDER%"
+settings:
+  colors: true
+  memory_limit: 1024M
+  error_level: E_ALL
+params:
+  - .env.dist
+extensions:
+  enabled:
+    - Codeception\Extension\RunFailed

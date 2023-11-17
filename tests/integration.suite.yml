@@ -1,0 +1,22 @@
+actor: IntegrationTester
+bootstrap: _bootstrap.php
+modules:
+  enabled:
+    - WPLoader
+    - \Helper\Integration
+  config:
+    WPLoader:
+      wpRootFolder: "%WP_ROOT_FOLDER%"
+      dbName: "%WP_TEST_DB_NAME%"
+      dbHost: "%WP_TEST_DB_HOST%"
+      dbUser: "%WP_TEST_DB_USER%"
+      dbPassword: "%WP_TEST_DB_PASSWORD%"
+      tablePrefix: test_
+      domain: "%WP_DOMAIN%"
+      adminEmail: admin@memberdash.localhost
+      title: "MemberDash Tests"
+      plugins:
+        - memberdash/memberdash.php
+      activatePlugins:
+        - memberdash/memberdash.php
+      theme: twentytwentytwo # cspell: disable-line
